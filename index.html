@@ -1,0 +1,47 @@
+html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invalid URL Handler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #errorMessage {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Invalid URL Handler</h2>
+
+<form id="urlForm">
+    <label for="url">Enter URL:</label><br>
+    <input type="text" id="url" name="url"><br>
+    <input type="submit" value="Submit">
+</form>
+
+<p id="errorMessage"></p>
+
+<script>
+    document.getElementById('urlForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var url = document.getElementById('url').value;
+        if (!url || !isValidURL(url)) {
+            document.getElementById('errorMessage').textContent = 'Invalid URL. Please try again.';
+        } else {
+            document.getElementById('errorMessage').textContent = '';
+            window.location.href = url;
+        }
+    });
+
+    function isValidURL(str) {
+        var a  = document.createElement('a');
+        a.href = str;
+        return (a.host && a.host != window.location.host);
+    }
+</script>
+
+</body>
+</html>
